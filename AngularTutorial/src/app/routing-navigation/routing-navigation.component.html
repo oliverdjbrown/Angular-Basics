@@ -1,0 +1,54 @@
+<h1>Routing and Navigation</h1>
+El enrutador angular le permite mostrar diferentes componentes y datos al usuario según la ubicación del usuario en la aplicación. El enrutador permite la navegación de una vista a la siguiente a medida que los usuarios realizan tareas como las siguientes: Ingresar una URL en la barra de direcciones para navegar a la página correspondiente. Al hacer clic en los enlaces de la página para navegar a una nueva página. Al hacer clic en los botones Atrás y Adelante del navegador para navegar hacia atrás y adelante a través del historial del navegador.
+
+<h1>Wildcard Route and Redirecting Routes</h1>
+En cualquier aplicación angular, utilizamos enrutamiento para navegar de una vista a otra. ¿Qué sucede si no definimos una ruta determinada e intentamos navegar a esa ruta? Bueno, la aplicación Angular arroja un error. Entonces, tenemos que definir cuidadosamente el enrutador para la navegación. Podemos usar el enrutamiento comodín para definir la ruta. Con la ayuda de comodines, podemos realizar ciertas operaciones relacionadas con la definición de la ruta para una aplicación.
+
+1) para esto simplemente creamos un componente que va a cumplir con la funcion de ser la vista por defecto en caso de no encontrarse la ruta.
+2) luego agregamos en el ultimo lugar del "app-rounting-module.ts" la siguiente ruta  path: '**', component: NombreComponente  }" 
+3) para establecer nuestra ruta por defecto agregamos al principio de nuestas rutas   path: '', redirectTo: '', pathMatch: 'full' }";
+
+<h1>Route Parameters</h1>
+Los parámetros de ruta corresponden a las variables de ruta que usted define en la ruta. La URL que coincide con la ruta proporciona el productId. Angular usa el productId para mostrar los detalles de cada producto único.
+
+1) dentro de app-routing.module.ts crearemos nuestra ruta con un parametro.
+2) para pasar el parametro al navegar, primero injectamos en el constructor (private router: Router), importamos el servicio luego creamos un metodo en nuestro componente TS que se activara al hacer clic sobre el elemento (ruta) al cual vamos a navegar pasando asi el id.
+3) para leer el id (parametro) desde el componente al cual vamos a navegar primero escribimos dentro del constructor (private route: ActivatedRoute) e importamos el servicio, luego dentro del metodo onInit escribimos variableID = parseInt(this.route.snapshot.paramMap.get('id'));.
+4) luego mostramos la viariable en la vista utilizando la interpolacion.
+
+<h1>Optional Routes Parameters</h1>
+Esto proporciona que podamos usar parametros en la ruta.
+
+1) en la visa del componente hijo crearemos un boton con el evento regresar para asi regresar al evento padre.
+2) en el archivo Ts del componente hijo crearemos un metodo el cual captura el ID actual para luego regresarlo como parametro opcional al componente padre.
+3) En el formulario padre injectaremos en el constructor private route: ActivatedRoute.
+4) Importamos las propiedades ActivatedRoute y ParamMap.
+5) en el metodo ngOnInit escribiremos un codigo que capturara el id de nuestra ruta.
+6) en la vista de nuestro componente padre por medio de classbinding validaremos si dentro de nuestra lista uno de los elementos concuerda con el id capturado para luego aplicar un css y resaltarlo.
+
+<h1>Relative Navigation</h1>
+navegación relativa en la aplicación angular. Mientras construimos la aplicación con el uso de la ruta absoluta, fijamos el mismo enlace en todas partes donde la necesitamos en esa ruta. Entonces, cuando cambiamos la ruta principal, entonces tenemos que cambiar la ruta para reflejar los enlaces utilizados también afuera. Entonces, mediante el uso de una ruta relativa, está liberando sus enlaces que son relativos al segmento URL actual. Su área de enrutamiento característica será la misma incluso si cambia la ruta para el padre. Simplemente está liberando su enlace incluso si cambia la ruta de ruta principal.
+
+1) para hacer uso de la ruta relativa en el componente TS hijo dentro del metodo regresar utilizaremos
+el codigo.
+
+<h1>Child Routes</h1>
+Es fácil crear cualquier tipo de jerarquía de enrutamiento en sus aplicaciones angulares utilizando rutas secundarias en las configuraciones de su enrutador.
+
+1) primero creamos los componentes que van a fungir como hijos.
+2) luego en el archivo app-routing-module.ts definimos el arreglo de rutas dentro de la ruta padre.
+3) por ultimo agregamos un boton en la vista del componente padre la cual tendra el evento click y llamara el metodo que navegara a los componentes hijos.
+4) debajo de estos componentes colocamos las etiquetas router-outlet para que se muestren los componentes.
+
+<h3>
+    Listado de Framworks
+</h3>
+
+<ul class="items">
+    <li (click)="onSelect(framework)" [class.selected]="isSelected(framework)" *ngFor="let framework of frameworks">
+        <span class="badge">{{framework.id}}</span> {{framework.nombre}}
+    </li>
+</ul>
+
+
+
